@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %}home page{% endblock title %}
+{% block content %}
+
+<h1>Developer Salary Calculator</h1>
+<p>
+  See how much you can earn as a software developer. Plus, get a job with the
+  stack you love and the salary you deserve.
+</p>
+
+<div class="row">
+  <div class="col-md-6">{% include "about.html" %}</div>
+  <div class="col-md-6">{% include "prediction.html" %}</div>
+</div>
+{% endblock content %}

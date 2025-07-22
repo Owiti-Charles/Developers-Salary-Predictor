@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=salary_predictor
+POSTGRES_USER=LXkXhbdPBkGSBMiRttVNJnSOuYRzMpkF
+POSTGRES_PASSWORD=wWZrFrl1RO0NMqFNb29DXq3GhCsuCNpzYxUPE1rmShIpSta5VFZiH1YgpRWlSBFB
