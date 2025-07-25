@@ -126,7 +126,7 @@ The optimized **LightGBM** model achieved:
 # 🔮 Future Improvements
 
 - Incorporate **cost-of-living indices** for regionally adjusted predictions.
-- Explore **neural networks** for deeper pattern detection.
+- Explore further with **neural networks** for deeper pattern detection.
 - Enrich Kenya-specific data using **local job board APIs**.
 - Test **additional ensemble models** for marginal performance gains.
 
