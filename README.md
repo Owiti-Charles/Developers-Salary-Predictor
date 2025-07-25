@@ -132,13 +132,6 @@ The optimized **LightGBM** model achieved:
 
 ---
 
-# 📜 License
-
-This project is licensed under the MIT License.
-See the LICENSE file for full details.
-
----
-
 # 🙏 Acknowledgments
 
 Stack Overflow for open-access developer survey data.
