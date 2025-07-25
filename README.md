@@ -89,7 +89,7 @@ The optimized **LightGBM** model achieved:
 | XGBoost             | 0.4717 | 0.6027   | Strong Single Model    |
 | **LightGBM (Opt.)** | **0.4619** | **0.6192** | **Production Choice**   |
 | Stacking Ensemble   | 0.4620 | 0.6189   | Marginal Gains         |
-|Neural Network   | 0.4715   | 0.603043   | Marginal Gains         |
+|Neural Network   | 0.4715   | 0.603043   | Needs tuning          |
 ---
 
 ## 🧠 Key Insights
