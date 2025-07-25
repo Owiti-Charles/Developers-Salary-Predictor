@@ -142,16 +142,17 @@ The optimized **LightGBM** model achieved:
 - Test **additional ensemble models** for marginal performance gains.
 
 ---
-🙏 Acknowledgments
+# 🙏 Acknowledgments
 
-Stack Overflow for open-access developer survey data.
-Open-source libraries used:
--pandas
--scikit-learn
--xgboost
--lightgbm
--TensorFlow
--shap
-Inspired by global developer insights from:
--GitHub Octoverse
--HackerRank Developer Reports
+Stack Overflow for open-access developer survey data.  
+Open-source libraries used:  
+-pandas  
+-scikit-learn  
+-xgboost  
+-lightgbm  
+-TensorFlow  
+-shap  
+
+Inspired by global developer insights from:  
+-GitHub Octoverse  
+-HackerRank Developer Reports  
