@@ -397,15 +397,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 MODEL_PATH_LGBM = BASE_DIR / 'models' / 'lightgbm_model.pkl'
 FEATURES_PATH_LGBM = BASE_DIR / 'models'/'lightgbm_params.pkl'
 
-MODEL_PATH_STACKED = BASE_DIR / 'models' / 'stacked_regressor.pkl'
-FEATURES_PATH_STACKED = BASE_DIR / 'models' / 'stacked_regressor_params.pkl'
 
 # Load the trained model
 lgbm_model = joblib.load(MODEL_PATH_LGBM)
-stacked_model = joblib.load(MODEL_PATH_STACKED)
 
 LGBM_FEATURES = joblib.load(FEATURES_PATH_LGBM)
-STACKED_FEATURES = joblib.load(FEATURES_PATH_STACKED)
+
 
 feature_info = joblib.load('models/feature_info.pkl')
 preprocessor = joblib.load('models/lightgbm_preprocessor.pkl')
