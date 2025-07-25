@@ -21,7 +21,7 @@ urlpatterns = [
     # path("users/", include("salary_predictor.users.urls", namespace="users")),
     # path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    path("", include("predictor.urls", namespace="predictor")),
+    path("", include("salary_predictor.predictor.urls", namespace="predictor")),
     # ...
 ]
 

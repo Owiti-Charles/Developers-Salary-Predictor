@@ -3,6 +3,7 @@ log:
 
 entryPoints:
   web:
+    # HTTP
     address: ':80'
 
   flower:
@@ -11,7 +12,7 @@ entryPoints:
 http:
   routers:
     web-router:
-      rule: 'HostRegexp(`{host:.+}`)'
+      rule: 'Host(`${TRAEFIK_IP}`)'
       entryPoints:
         - web
       middlewares:
@@ -19,13 +20,15 @@ http:
       service: django
 
     flower-router:
-      rule: 'HostRegexp(`{host:.+}`)'
+      rule: 'Host(`${TRAEFIK_IP}`)'
       entryPoints:
         - flower
       service: flower
 
   middlewares:
     csrf:
+      # https://doc.traefik.io/traefik/middlewares/http/headers/#hostsproxyheaders
+      # https://docs.djangoproject.com/en/dev/ref/csrf/#ajax
       headers:
         hostsProxyHeaders: ['X-CSRFToken']
 
@@ -41,6 +44,7 @@ http:
           - url: http://flower:5555
 
 providers:
+  # https://doc.traefik.io/traefik/providers/file/
   file:
     filename: /etc/traefik/traefik.yml
     watch: true

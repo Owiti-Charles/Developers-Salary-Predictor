@@ -2,9 +2,9 @@ volumes:
   production_postgres_data: {}
   production_postgres_data_backups: {}
   production_traefik: {}
-  
+
   production_redis_data: {}
-  
+
 
 
 services:
@@ -12,6 +12,10 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
+
+    networks:
+      - traefik-public
+      - default
 
     image: salary_predictor_production_django
     depends_on:
@@ -32,6 +36,8 @@ services:
       - production_postgres_data_backups:/backups
     env_file:
       - ./.envs/.production/.postgres
+    networks:
+      - traefik-public
 
   traefik:
     build:
@@ -40,34 +46,47 @@ services:
     image: salary_predictor_production_traefik
     depends_on:
       - django
+    env_file:
+      - ./.envs/.production/.django
     volumes:
       - production_traefik:/etc/traefik/acme
     ports:
       - '0.0.0.0:80:80'
       - '0.0.0.0:443:443'
       - '0.0.0.0:5555:5555'
+    networks:
+      - traefik-public
 
   redis:
     image: docker.io/redis:6
-    
+
+    networks:
+      - traefik-public
+
     volumes:
       - production_redis_data:/data
-    
+
 
   celeryworker:
     <<: *django
     image: salary_predictor_production_celeryworker
     command: /start-celeryworker
+    networks:
+      - traefik-public
 
   celerybeat:
     <<: *django
     image: salary_predictor_production_celerybeat
     command: /start-celerybeat
+    networks:
+      - traefik-public
 
   flower:
     <<: *django
     image: salary_predictor_production_flower
     command: /start-flower
+    networks:
+      - traefik-public
 
   awscli:
     build:
@@ -77,3 +96,7 @@ services:
       - ./.envs/.production/.django
     volumes:
       - production_postgres_data_backups:/backups:z
+
+networks:
+  traefik-public:
+    name: traefik-public

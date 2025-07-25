@@ -88,7 +88,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "predictor",
+    "salary_predictor.predictor",
     "salary_predictor.users",
 
     # Your stuff: custom apps go here
