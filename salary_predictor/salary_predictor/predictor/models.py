@@ -14,6 +14,9 @@ class DeveloperSurvey(models.Model):
         ('No, but I plan to soon', 'Planning to Use AI'),
         ('No', 'Not Using AI')
     ], blank=True)
+    industry = models.CharField(max_length=100, blank=True)
+    platforms = models.TextField(blank=True)
+    remote_work = models.CharField(max_length=50, )
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

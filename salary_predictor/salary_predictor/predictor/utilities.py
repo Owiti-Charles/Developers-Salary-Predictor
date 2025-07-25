@@ -1,6 +1,5 @@
 import pandas as pd
 import joblib
-import os
 from pathlib import Path
 import numpy as np
 
@@ -205,14 +204,39 @@ remote_work = [
     ("In-person", "In-person")
 ]
 
-Industry = [
-    "Tech",
-    "Finance",
-    "Manufacturing/Supply Chain",
-    "Services",
-    "Healthcare",
-    "Government",
-    "Other",
+platforms = [
+    ('Amazon Web Services (AWS)', 'Amazon Web Services (AWS)'),
+    ('Cloudflare','Cloudflare'),
+    ('Colocation', 'Colocation'),
+    ('Digital Ocean', 'Digital Ocean'),
+    ('Firebase', 'Firebase'),
+    ('Fly.io', 'Fly.io'),
+    ('Google Cloud', 'Google Cloud'),
+    ('Heroku', 'Heroku'),
+    ('Hetzner', 'Hetzner'),
+    ('IBM Cloud Or Watson', 'IBM Cloud Or Watson'),
+    ('Linode, now Akamai', 'Linode, now Akamai'),
+    ('Managed Hosting', 'Managed Hosting'),
+    ('Microsoft Azure', 'Microsoft Azure'),
+    ('Netlify', 'Netlify'),
+    ('OpenShift', 'OpenShift'),
+    ('OpenStack', 'OpenStack'),
+    ('Oracle Cloud Infrastructure (OCI)', 'Oracle Cloud Infrastructure (OCI)'),
+    ('OVH', 'OVH'),
+    ('Render', 'Render'),
+    ('Scaleway', 'Scaleway'),
+    ('Vercel', 'Vercel'),
+    ('VMware', 'VMware'),
+    ('Vultr', 'Vultr')
+]
+industries = [
+    ("Tech", "Tech"),
+    ("Finance", "Finance"),
+    ("Manufacturing/Supply Chain", "Manufacturing/Supply Chain"),
+    ("Services", "Services"),
+    ("Healthcare", "Healthcare"),
+    ("Government", "Government"),
+    ("Other", "Other"),
 ]
 dev_types = [
     ("Senior Executive (C-Suite, VP, etc.)", "Senior Executive (C-Suite, VP, etc.)"),
@@ -325,88 +349,134 @@ programming_languages = [
     ("Zig", "Zig")
 ]
 
+def get_region(country):
+    if country in  [
+    'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 'Cape Verde', 'Cameroon',
+    'Central African Republic', 'Chad', 'Comoros', 'Democratic Republic of the Congo', 'Congo', 'Congo, Republic of the...',
+    'Côte d’Ivoire', "Côte d'Ivoire", 'Djibouti', 'Equatorial Guinea', 'Eritrea', 'Eswatini', 'Ethiopia',
+    'Gabon', 'Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau', 'Kenya', 'Lesotho', 'Liberia',
+    'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Mozambique', 'Namibia',
+    'Niger', 'Nigeria', 'Rwanda', 'São Tomé and Príncipe', 'Senegal', 'Seychelles',
+    'Sierra Leone', 'Somalia', 'South Africa', 'South Sudan', 'Sudan', 'Swaziland', 'Tanzania',
+    'Togo', 'Uganda', 'United Republic of Tanzania', 'Zambia', 'Zimbabwe'
+]:
+        return 'Sub Saharan Africa'
+    elif country in ['United States of America', 'Canada']:
+        return 'North America'
+    elif country in ['United Kingdom of Great Britain and Northern Ireland', 'Germany', 'France', 'Italy', 'Netherlands', 'Sweden', 'Switzerland',
+                     'Austria', 'Belgium', 'Portugal', 'Spain', 'Greece', 'Norway', 'Iceland', 'Denmark', 'Finland', 'Ireland', 'Estonia',
+                     'Lithuania', 'Latvia', 'Luxembourg', 'Monaco']:
+        return 'Western & Northern Europe'
+    elif country in ['Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia', 'Costa Rica', 'Cuba', 'Dominican Republic', 'Ecuador',
+                    'El Salvador', 'Guatemala', 'Honduras', 'Mexico', 'Nicaragua', 'Panama', 'Paraguay', 'Peru', 'Uruguay', 'Venezuela', 'Venezuela, Bolivarian Republic of...']:
+        return 'Latin America'
+    elif country in ['India', 'Pakistan', 'Bangladesh', 'Sri Lanka', 'Indonesia', 'Nepal', 'Viet Nam', 'Philippines', 'Malaysia', 'Thailand',
+                     'Bhutan', 'Maldives', 'Brunei', 'Cambodia', 'Laos', 'Myanmar']:
+        return 'South & Southeast Asia'
+    elif country in ['China', 'Japan', 'South Korea', 'Taiwan', 'Hong Kong', 'Hong Kong (S.A.R.)', 'Singapore', 'Macau', 'Mongolia', 'North Korea', 'Republic of Korea', "Democratic People's Republic of Korea"]:
+        return 'East Asia'
+    elif country in ['Armenia', 'Albenia','Armenia', 'Montenegro', 'Poland', 'Ukraine', 'Romania', 'Russian Federation', 'Serbia', 'Czech Republic', 'Slovakia', 'Hungary', 'Moldova', 'Republic of Moldova', 'Belarus', 'Bulgaria', 'Kosovo', 'Slovenia',
+                    'Croatia', 'Bosnia and Herzegovina', 'Kazakhstan', 'Uzbekistan', 'Albania', 'Azerbaijan', 'Kyrgyzstan', 'Afghanistan', 'Georgia']:
+        return 'Eastern Europe & Central Asia'
+    elif country in ['Australia', 'New Zealand', 'Fiji']:
+        return 'Oceania'
+    elif country in ['Antigua and Barbuda', 'Bahamas', 'Barbados', 'Dominica', 'Grenada', 'Haiti', 'Jamaica', 'Saint Kitts and Nevis',
+                     'Saint Lucia', 'Saint Vincent', 'The Grenadines', 'Trinidad and Tobago', 'Anguilla', 'Aruba', 'British Virgin Islands',
+                     'Cayman Islands', 'Puerto Rico']:
+        return 'Caribbean'
+    elif country in ['Algeria', 'Egypt', 'Libya', 'Morocco', 'Tunisia', 'Mauritania',
+                 'Bahrain', 'Iran, Islamic Republic of...', 'Iraq', 'Israel', 'Jordan', 'Kuwait', 'Lebanon', 'Oman', 'Cyprus',
+                 'Turkey', 'Georgia', 'Malta', 'Palestine', 'Qatar', 'Saudi Arabia', 'Syria', 'Syrian Arab Republic', 'United Arab Emirates', 'Yemen']:
+        return 'MENA'
+    else:
+        return 'Other'
+
 
 # Define paths
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-MODEL_PATH = BASE_DIR / 'models' / 'LinearRegression_salary_predictor.pkl'
-FEATURES_PATH = BASE_DIR / 'models'/'LinearRegression_feature_names.pkl'
+MODEL_PATH_LGBM = BASE_DIR / 'models' / 'lightgbm_model.pkl'
+FEATURES_PATH_LGBM = BASE_DIR / 'models'/'lightgbm_params.pkl'
+
+MODEL_PATH_STACKED = BASE_DIR / 'models' / 'stacked_regressor.pkl'
+FEATURES_PATH_STACKED = BASE_DIR / 'models' / 'stacked_regressor_params.pkl'
 
 # Load the trained model
-model = joblib.load(MODEL_PATH)
+lgbm_model = joblib.load(MODEL_PATH_LGBM)
+stacked_model = joblib.load(MODEL_PATH_STACKED)
 
-# List of expected features (based on your training data)
-# FEATURES = [
-    # 'YearsCode', 'YearsCodePro',
-    # 'Country_United States', 'Country_India', 'Country_Other',  # Example one-hot encoded countries
-    # 'DevType_Full-stack developer', 'DevType_Back-end developer',  # Example roles
-    # 'EdLevel_Bachelor’s degree', 'EdLevel_Master’s degree',
-    # 'RemoteWork_Remote', 'RemoteWork_Hybrid',
-    # 'LanguageHaveWorkedWith_Python', 'LanguageHaveWorkedWith_JavaScript',  # Example languages
-# ]
-#
-FEATURES = joblib.load(FEATURES_PATH)
-breakpoint()  # Debugging breakpoint
+LGBM_FEATURES = joblib.load(FEATURES_PATH_LGBM)
+STACKED_FEATURES = joblib.load(FEATURES_PATH_STACKED)
 
-def preprocess_input(data, feature_names):
+feature_info = joblib.load('models/feature_info.pkl')
+preprocessor = joblib.load('models/lightgbm_preprocessor.pkl')
+
+def preprocess_input(data):
     """Preprocess user input to match model features."""
-    # Initialize DataFrame with zeros for all expected features
-    input_df = pd.DataFrame(0, index=[0], columns=feature_names)
+
+    # Initialize output dictionary with default values
+    input_df = {col: 0 for col in feature_info['numerical_features']}
+    input_df.update({col: None for col in feature_info['onehot_features'] + feature_info['target_encoded_features']})
 
     # Numerical features
-    input_df['num__YearsCode'] = float(data.get('years_code_pro', 0))  # Assume YearsCode = YearsCodePro
-    input_df['num__YearsCodePro'] = float(data.get('years_code_pro', 0))
-    input_df['num__NumLanguages'] = len(data.get('languages', [])) if data.get('languages') else 0
-    input_df['num__NumTools'] = 1 if data.get('ai_select', '') in ['Yes', 'No, but I plan to soon'] else 0
-    input_df['num__NumPlatforms'] = len(data.get('platforms', [])) if data.get('platforms') else 0
+    input_df['YearsCode'] = float(data.get('years_code_pro', 0))  # Assume YearsCode = YearsCodePro
+    input_df['YearsCodePro'] = float(data.get('years_code_pro', 0))
+    input_df['NumLanguages'] = len(data.get('programming_languages', []))
+    input_df['NumTools'] = 1 if data.get('ai_select', '') in ['Yes', 'No, but I plan to soon'] else 0
+    input_df['NumPlatforms'] = len(data.get('platforms', []))
 
     # Language features
-    for lang in data.get('languages', []):
-        col = f'num__Language_{lang}'
-        if col in feature_names:
-            input_df[col] = 1
+    #Dynamic Lang_* features
+    for lang in data.get('programming_languages', []):
+        lang_col = f"Lang_{lang}"
+        if lang_col in feature_info['numerical_features']:
+            input_df[lang_col] = 1
 
-    # Database features
-    for db in data.get('databases', []):
-        col = f'num__Database_{db}'
-        if col in feature_names:
-            input_df[col] = 1
+    # Dynamic Platform_* features
+    for platform in data.get('platforms', []):
+        platform_col = f"Platform_{platform}"
+        if platform_col in feature_info['numerical_features']:
+            input_df[platform_col] = 1
 
-    # Platform features
-    for plat in data.get('platforms', []):
-        col = f'num__Platform_{plat}'
-        if col in feature_names:
-            input_df[col] = 1
+    ed_level_mapping = {
+        'Bachelor’s degree (B.A., B.S., B.Eng., etc.)': 3,
+        'Master’s degree (M.A., M.S., M.Eng., MBA, etc.)': 4,
+        "Some college/university study without earning a degree": 3,
+        "Associate degree (A.A., A.S., etc.)": 3,
+        "Primary/elementary school": 0,
+        "Professional degree (JD, MD, Ph.D, Ed.D, etc.)": 5,
+        "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)": 1,
+        "Something else": 0
+    }
+    input_df['EdLevel_Encoded'] = ed_level_mapping.get(data.get('ed_level', ''), 0)
+
+    years_coding = float(data.get('years_of_coding', 0))
+    if years_coding <= 5:
+        input_df['ExperienceLevel'] = 'Junior'
+    elif years_coding <= 10:
+        input_df['ExperienceLevel'] = 'Mid'
+    else:
+        input_df['ExperienceLevel'] = 'Senior'
 
     # Categorical features
-    country = data.get('country', 'Other')
-    if country and f'cat__Country_{country}' in feature_names:
-        input_df[f'cat__Country_{country}'] = 1
-    else:
-        input_df['cat__Country_Other'] = 1
+    country = data.get('countries', '')
+    if country:
+        input_df['Region'] = get_region(country)
 
     dev_type = data.get('dev_type', 'Other')
-    if dev_type and f'cat__DevType_{dev_type}' in feature_names:
-        input_df[f'cat__DevType_{dev_type}'] = 1
+    if dev_type:
+        input_df['DevType'] = dev_type
 
-    ed_level = data.get('ed_level', 'Other')
-    if ed_level and f'cat__EdLevel_{ed_level}' in feature_names:
-        input_df[f'cat__EdLevel_{ed_level}'] = 1
+    all_features = (feature_info['numerical_features'] +
+                    feature_info['onehot_features'] +
+                    feature_info['target_encoded_features'])
 
-    remote_work = data.get('remote_work', 'In-person')
-    if remote_work and f'cat__RemoteWork_{remote_work}' in feature_names:
-        input_df[f'cat__RemoteWork_{remote_work}'] = 1
-
-    org_size = data.get('org_size', '10,000 or more employees')
-    if org_size and f'cat__OrgSize_{org_size}' in feature_names:
-        input_df[f'cat__OrgSize_{org_size}'] = 1
-
+    input_df = pd.DataFrame([input_df], columns=all_features)
     return input_df
 
 def predict_salary(data, ):
     """Predict salary from user input."""
-    input_df = preprocess_input(data, FEATURES)
-    breakpoint()
+    input_df = preprocess_input(data)
     print(f"Input DataFrame for prediction:\n{input_df}")
-    log_salary = model.predict(input_df)[0]
+    log_salary = lgbm_model.predict(input_df)[0]
     salary = round(np.expm1(log_salary), 2)  # Reverse log-transform
     return salary

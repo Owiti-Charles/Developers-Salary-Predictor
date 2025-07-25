@@ -1,6 +1,6 @@
 from django import forms
 
-from .utilities import EdLevel, countries, dev_types, programming_languages
+from .utilities import EdLevel, countries, dev_types, programming_languages, industries, platforms
 
 from .models import DeveloperSurvey
 
@@ -12,6 +12,12 @@ class SurveyForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple,
         required=False,
         label="Programming Languages"
+    )
+    platforms = forms.MultipleChoiceField(
+        choices=platforms,
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+        label="Platforms"
     )
 
     def clean_years_code_pro(self):
@@ -39,6 +45,8 @@ class SurveyForm(forms.ModelForm):
             "ed_level",
             "countries",
             "programming_languages",
+            "industry",
+            "platforms",
         ]
         widgets = {
             "dev_type": forms.Select(
@@ -62,4 +70,8 @@ class SurveyForm(forms.ModelForm):
                 choices=[("", "Select Education Level"), *EdLevel]
             ),
             "countries": forms.Select(choices=[("", "Select Country"), *countries]),
+            "industry": forms.Select(
+                choices=[("", "Select Industry"), *industries]
+            ),
+
         }

@@ -9,12 +9,10 @@ from .forms import SurveyForm
 def home(request):
     """Render the home page with the survey form."""
     prediction = None
-    breakpoint()  # Debugging breakpoint
     if request.method == 'POST':
         form = SurveyForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            print(f"Form data received: {data}")
             prediction = predict_salary(data)
             print(f"Prediction: {prediction}")
     else:
