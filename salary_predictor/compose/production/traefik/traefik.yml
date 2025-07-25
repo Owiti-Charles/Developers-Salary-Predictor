@@ -1,26 +1,26 @@
-log:
-  level: INFO
+level: INFO
 
 entryPoints:
   web:
-    # HTTP
+    # HTTP for Django
     address: ':80'
-
   flower:
+    # HTTP for Flower
     address: ':5555'
 
 http:
   routers:
-    web-router:
-      rule: 'Host(`${TRAEFIK_IP}`)'
+    django-router:
+      # No Host rule to allow access via IP
+      rule: 'PathPrefix(`/`)'
       entryPoints:
         - web
       middlewares:
         - csrf
       service: django
-
     flower-router:
-      rule: 'Host(`${TRAEFIK_IP}`)'
+      # No Host rule to allow access via IP
+      rule: 'PathPrefix(`/`)'
       entryPoints:
         - flower
       service: flower
@@ -28,7 +28,6 @@ http:
   middlewares:
     csrf:
       # https://doc.traefik.io/traefik/middlewares/http/headers/#hostsproxyheaders
-      # https://docs.djangoproject.com/en/dev/ref/csrf/#ajax
       headers:
         hostsProxyHeaders: ['X-CSRFToken']
 
@@ -37,14 +36,16 @@ http:
       loadBalancer:
         servers:
           - url: http://django:5000
-
     flower:
       loadBalancer:
         servers:
           - url: http://flower:5555
 
 providers:
-  # https://doc.traefik.io/traefik/providers/file/
   file:
     filename: /etc/traefik/traefik.yml
     watch: true
+
+networks:
+  traefik-public:
+    external: true
