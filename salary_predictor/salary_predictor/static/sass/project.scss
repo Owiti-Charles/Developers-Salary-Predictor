@@ -1,0 +1,60 @@
+@import 'custom_bootstrap_vars';
+@import '~bootstrap/scss/bootstrap';
+
+// project specific CSS goes here
+
+///////////////
+// Variables //
+///////////////
+
+// Alert colors
+
+$white: #fff;
+$mint-green: #d6e9c6;
+$black: #000;
+$pink: #f2dede;
+$dark-pink: #eed3d7;
+$red: #b94a48;
+
+////////////
+// Alerts //
+////////////
+
+// bootstrap alert CSS, translated to the django-standard levels of
+// debug, info, success, warning, error
+
+.alert-debug {
+  background-color: $white;
+  border-color: $mint-green;
+  color: $black;
+}
+
+.alert-error {
+  background-color: $pink;
+  border-color: $dark-pink;
+  color: $red;
+}
+
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.footer {
+  margin-top: auto;
+  background-color: #222 !important;
+  color: #fff !important;
+}
+.footer a {
+  color: #f8f9fa !important;
+  text-decoration: underline;
+}
+.footer a:hover {
+  color: #ffc107 !important;
+  text-decoration: none;
+}
+
+
