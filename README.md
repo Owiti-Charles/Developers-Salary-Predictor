@@ -180,4 +180,4 @@ To reproduce results:
 
 [🔗 Final Notebook](notebooks.ipynb)  
 [📽️ Project Presentation](presentation.pdf)  
-[📊 Tableau Viualisations](https://public.tableau.com/views/DEVELOPERSALARYINSIGHTS/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+[📊 Tableau Visualisations](https://public.tableau.com/views/DEVELOPERSALARYINSIGHTS/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
