@@ -1,12 +1,11 @@
 # 💼 Developer Salary Prediction: Stack Overflow Survey 2023–2024
 
-# 👥 Authors
-  - Makena Odongo
-  - Paul Otuoro
-  - Viola Kimitei
-  - Charles Owiti
-  - Austine Otieno
-
+## Authors
+    - Makena Odongo
+    - Paul Otuoro
+    - Viola Kimitei
+    - Charles Owiti
+    - Austine Otieno
 
 ## 📖 Project Overview
 This project builds a machine learning model to predict annual developer salaries using data from the Stack Overflow Developer Surveys (2023 and 2024). By leveraging demographic, professional, and technical features, the model provides data-driven salary benchmarks for developers, employers, and HR platforms, with a special focus on Kenya’s growing tech ecosystem.
@@ -46,7 +45,7 @@ The dataset comprises responses from the Stack Overflow Developer Surveys:
 ### Data Limitations
 
 - Schema differences between years (mitigated by aligning common columns)
-- Sparse data Sub-Saharan regions like Kenyan (addressed with global model and feature engineering)
+- Sparse Kenyan data (addressed with global model and feature engineering)
 - Salary outliers (handled via log transformation and IQR filtering)
 
 ---
@@ -61,12 +60,14 @@ To reproduce this project, follow these steps:
 - Git  
 - Jupyter Notebook  
 
+---
+
 ## 📦 Requirements
 
-Key packages include:
+See `requirements.txt` for a full list of dependencies. Key packages include:
 
 - `pandas`, `numpy` — data manipulation  
-- `scikit-learn`, `xgboost`, `lightgbm`, 'TensorFlow` — modeling  
+- `scikit-learn`, `xgboost`, `lightgbm`, `TensorFlow` — modeling  
 - `shap` — model interpretability  
 - `matplotlib`, `seaborn` — visualizations
 
@@ -89,7 +90,8 @@ The optimized **LightGBM** model achieved:
 | XGBoost             | 0.4717 | 0.6027   | Strong Single Model    |
 | **LightGBM (Opt.)** | **0.4619** | **0.6192** | **Production Choice**   |
 | Stacking Ensemble   | 0.4620 | 0.6189   | Marginal Gains         |
-|Neural Network   | 0.4715   | 0.603043   | Needs tuning          |
+| Neural Network   | 0.4715   | 0.6030   | Needs tuning         |
+
 ---
 
 ## 🧠 Key Insights
@@ -102,8 +104,17 @@ The optimized **LightGBM** model achieved:
 
 ### 📊 Visualizations:
 - **SHAP Summary Plot**: Shows how each feature influences predictions.
+
+![alt text](feature_importance.png)
+
 - **Feature Importance Plot**: Highlights the most predictive variables.
+
+![alt text](feature_importance1.png)
+
 - **Actual vs. Predicted Plot**: Demonstrates model accuracy.
+
+![alt text](actual_predicted.png)
+
 
 ---
 
@@ -126,22 +137,22 @@ The optimized **LightGBM** model achieved:
 # 🔮 Future Improvements
 
 - Incorporate **cost-of-living indices** for regionally adjusted predictions.
-- Explore further with **neural networks** for deeper pattern detection.
+- Explore **neural networks** for deeper pattern detection.
 - Enrich Kenya-specific data using **local job board APIs**.
 - Test **additional ensemble models** for marginal performance gains.
 
 ---
-
 # 🙏 Acknowledgments
 
-Stack Overflow for open-access developer survey data.
-Open-source libraries used:
-- pandas
-- scikit-learn
-- xgboost
-- lightgbm
-- shap
+Stack Overflow for open-access developer survey data.  
+Open-source libraries used:  
+-pandas  
+-scikit-learn  
+-xgboost  
+-lightgbm  
+-TensorFlow  
+-shap  
 
-Inspired by global developer insights from:
-- GitHub Octoverse
-- HackerRank Developer Reports
+Inspired by global developer insights from:  
+-GitHub Octoverse  
+-HackerRank Developer Reports  
