@@ -179,5 +179,5 @@ To reproduce results:
 3. Run `notebooks.ipynb`
 
 [🔗 Final Notebook](notebooks.ipynb)  
-[📽️ Project Presentation](presentation.pdf)
-[📊 Tableau Viualisations]()
+[📽️ Project Presentation](presentation.pdf)  
+[📊 Tableau Viualisations](https://public.tableau.com/views/DEVELOPERSALARYINSIGHTS/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
