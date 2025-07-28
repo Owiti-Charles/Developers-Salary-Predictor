@@ -167,6 +167,7 @@ Inspired by global developer insights from:
 | `salary_predictor` | Method of deployment |
 | `.gitignore` | Git exclusions (e.g., large CSVs, logs, etc.) |
 | `README.md` | Project README |
+| `notebook_final.ipynb` | Project notebook |
 | `requirements.txt` | Project dependencies |
 | `presentation.pdf` | Slide deck summarizing project findings |
 
