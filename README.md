@@ -10,6 +10,8 @@
 ## 📖 Project Overview
 This project builds a machine learning model to predict annual developer salaries using data from the Stack Overflow Developer Surveys (2023 and 2024). By leveraging demographic, professional, and technical features, the model provides data-driven salary benchmarks for developers, employers, and HR platforms, with a special focus on Kenya’s growing tech ecosystem.
 
+![image](images/Research-img.png)
+
 ---
 
 ## 🎯 Objectives
@@ -105,15 +107,15 @@ The optimized **LightGBM** model achieved:
 ### 📊 Visualizations:
 - **SHAP Summary Plot**: Shows how each feature influences predictions.
 
-![alt text](feature_importance.png)
+![alt text](images/feature_importance.png)
 
 - **Feature Importance Plot**: Highlights the most predictive variables.
 
-![alt text](feature_importance1.png)
+![alt text](images/feature_importance1.png)
 
 - **Actual vs. Predicted Plot**: Demonstrates model accuracy.
 
-![alt text](actual_predicted.png)
+![alt text](images/actual_predicted.png)
 
 
 ---
@@ -156,3 +158,26 @@ Open-source libraries used:
 Inspired by global developer insights from:  
 -GitHub Octoverse  
 -HackerRank Developer Reports  
+
+# 📂 Repository Structure
+
+| File/Folder | Description |
+|-------------|-------------|
+| `images/` | All visualizations used in the README and analysis |
+| `salary_predictor` | Method of deployment |
+| `.gitignore` | Git exclusions (e.g., large CSVs, logs, etc.) |
+| `README.md` | Project README |
+| `requirements.txt` | Project dependencies |
+| `presentation.pdf` | Slide deck summarizing project findings |
+
+---
+
+📌 **Run This Project:**  
+To reproduce results:
+1. Clone this repo  
+2. Install packages with `pip install -r requirements.txt`  
+3. Run `notebooks.ipynb`
+
+[🔗 Final Notebook](notebooks.ipynb)  
+[📽️ Project Presentation](presentation.pdf)
+[📊 Tableau Viualisations]()
