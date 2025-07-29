@@ -459,6 +459,10 @@ def preprocess_input(data):
     if country:
         input_df['Region'] = get_region(country)
 
+    remote_work = data.get('remote_work', 'Unknown')
+    if remote_work:
+        input_df['RemoteWork_Simplified'] = remote_work
+
     dev_type = data.get('dev_type', 'Other')
     if dev_type:
         input_df['DevType'] = dev_type

@@ -1,6 +1,6 @@
 from django import forms
 
-from .utilities import EdLevel, countries, dev_types, programming_languages, industries, platforms
+from .utilities import EdLevel, countries, dev_types, programming_languages, industries, platforms, remote_work
 
 from .models import DeveloperSurvey
 
@@ -47,6 +47,7 @@ class SurveyForm(forms.ModelForm):
             "programming_languages",
             "industry",
             "platforms",
+            "remote_work",
         ]
         widgets = {
             "dev_type": forms.Select(
@@ -72,6 +73,9 @@ class SurveyForm(forms.ModelForm):
             "countries": forms.Select(choices=[("", "Select Country"), *countries]),
             "industry": forms.Select(
                 choices=[("", "Select Industry"), *industries]
+            ),
+            "remote_work": forms.Select(
+                choices=[("", "Select Remote Work"), *remote_work]
             ),
 
         }
