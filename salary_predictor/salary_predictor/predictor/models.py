@@ -16,7 +16,7 @@ class DeveloperSurvey(models.Model):
     ], blank=True)
     industry = models.CharField(max_length=100, blank=True)
     platforms = models.TextField(blank=True)
-    remote_work = models.CharField(max_length=50, )
+    remote_work = models.CharField(max_length=50, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
